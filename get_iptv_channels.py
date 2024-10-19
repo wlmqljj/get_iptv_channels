@@ -42,7 +42,7 @@ date_now = time.strftime('%Y-%m-%d %X',time.localtime())
 BS = DES3.block_size
 def pad(s):
     p =  s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
-    return p
+    return p.encode('utf-8')
 def unpad(s):
     p =  s[0:-ord(s[-1])]
     return p
@@ -224,8 +224,8 @@ def get_channels(key):
         return
     print('已经获取到session:\nusertoken:%s,\nJSESSIONID:%s'%(usertoken,cookies['JSESSIONID']))
     channels = get_channel_list(host,usertoken,cookies,stbid)
-    ftxt = open(save_dir_txt,'w')
-    fm3u = open(save_dir_m3u,'w')
+    ftxt = open(save_dir_txt,'w', encoding='utf-8')
+    fm3u = open(save_dir_m3u,'w', encoding='utf-8')
     m3uline1 = '#EXTM3U\n'
     fm3u.write(m3uline1)
     ftxt.write(date_now)
